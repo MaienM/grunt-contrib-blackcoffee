@@ -1,5 +1,5 @@
 /*
- * grunt-contrib-coffee
+ * grunt-contrib-blackcoffee
  * http://gruntjs.com/
  *
  * Copyright (c) 2014 Eric Woroshow, contributors
@@ -14,7 +14,7 @@ module.exports = function(grunt) {
   var _ = require('lodash');
   var uriPath = require('uri-path');
 
-  grunt.registerMultiTask('coffee', 'Compile CoffeeScript files into JavaScript', function() {
+  grunt.registerMultiTask('blackcoffee', 'Compile CoffeeScript files into JavaScript using BlackCoffee', function() {
     var options = this.options({
       bare: false,
       join: false,
@@ -174,18 +174,18 @@ module.exports = function(grunt) {
     }
 
     try {
-      return require('coffee-script').compile(code, coffeeOptions);
+      return require('blackcoffee').compile(code, coffeeOptions);
     } catch (e) {
       if (e.location == null ||
           e.location.first_column == null ||
           e.location.first_line == null) {
         grunt.log.error('Got an unexpected exception ' +
-                        'from the coffee-script compiler. ' +
+                        'from the blackcoffee compiler. ' +
                         'The original exception was: ' +
                         e);
-        grunt.log.error('(The coffee-script compiler should not raise *unexpected* exceptions. ' +
-                        'You can file this error as an issue of the coffee-script compiler: ' +
-                        'https://github.com/jashkenas/coffee-script/issues)');
+        grunt.log.error('(The blackcoffee compiler should not raise *unexpected* exceptions. ' +
+                        'You can file this error as an issue of the blackcoffee compiler: ' +
+                        'https://github.com/paiq/blackcoffee/issues)');
       } else {
         var firstColumn = e.location.first_column;
         var firstLine = e.location.first_line;
